@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body{
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background-image: url(photo1.png);
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            transition: background-image 0.3s ease;
+        }
+
+        .container{
+            padding-top: 45px;
+            margin-left: 75px;
+            width: 330px;
+        }
+
+        .song{
+            color: white;
+            font-size: 25px;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+
+        .container2{
+            display: flex;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .container2.show{
+            opacity: 1;
+        }
+
+        .lyrics1 {
+            padding-top: 45px;
+            margin-right: 25px;
+            width: 292px;
+            height: 285px;
+            font-size: 16px;
+            color: white;
+        }
+
+        .lyrics2{
+            padding-top: 45px;
+            margin-right: 25px;
+            width: 292px;
+            height: 285px;
+            font-size: 16px;
+            color: white;
+            margin-right: 75px;
+        }
+
+        .big-container{
+            display: flex;
+            justify-content: space-between;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="big-container">
+    <div class="container">
+    <div class="song" data-src="Sway_It_Hula_Girl.mp3"><b>ono lisa</b> sway it, hula girl</div>
+    <div class="song" data-src="Red_Blouse.mp3"><b>ono lisa</b> Red Blouse</div>
+    <div class="song" data-src="My_Cherie_Amour.mp3"><b>ono lisa</b> My Cherie Amour</div>
+    <div class="song" data-src="Pretty_World.mp3"><b>ono lisa</b> Pretty World</div>
+    </div>
+    
+    <div class="container2">
+        <div class="lyrics1"></div>
+        <div class="lyrics2"></div>
+    </div>
+    
+    </div>
+
+    <audio id="audioPlayer" controls style="display:none;"></audio>
+
+<script>   
+    // 모든 노래 요소를 가져옵니다.
+    let songs = document.querySelectorAll('.song');
+    let lyrics1 = document.querySelector('div .lyrics1');
+    let lyrics2 = document.querySelector('div .lyrics2');
+    let lyricsContainer = document.querySelector('div .container2');
+
+    function changeBackground(imageUrl) {
+    const body = document.body;
+    body.style.transition = "background-image 0.3s ease";
+    document.body.style.backgroundImage = "url('" + imageUrl + "')";
+}
+
+    // 각 노래 요소에 클릭 이벤트를 추가합니다.
+    songs.forEach(function(song) {
+        song.addEventListener('click', function() {
+            let audioPlayer = document.getElementById('audioPlayer');
+            let songSrc = song.getAttribute('data-src');
+            let backgroundImage;
+
+            // 노래에 따라 배경 이미지를 설정합니다.
+        switch(songSrc) {
+            case 'Sway_It_Hula_Girl.mp3':
+                backgroundImage = 'photo1.png';
+                lyrics1.style.display = "block";
+                lyrics2.style.display = "block";
+                lyrics1.style.color = "white";
+                lyrics2.style.color = "white";
+                lyricsContainer.classList.add('show');
+                lyrics1.innerHTML = "Noite de luar, a brisa vem do marEu no teu olhar, uma estrela no céuSinto o teu desejo a querer o meu beijoE na hula, uma lua de mel Os meus pés no chão e a seduçãoDa flor encravada nos cabelos em trançaO balanço nos braços como aves suavesBatendo as asas na dança Danço a hula huki e o cha-cha-chaSou estrela no céuVem tocar meu corpo sensualQuero ouvir você chamar";
+                lyrics2.innerHTML = "Ao te ver dançar, deixo o meu olharPreso ao teu olhar como estrela no céuTodo meu desejo é te dar um beijoE contigo dançar, hula girl I have seen you dance a long time agoTo my favorite songs, so graceful and slowEvery movement you make is an artist's delightAs you paint your songs through your dance Bossa hula nova and the cha-cha-chaSou estrela no céuLay, lay, wait for me, if you please Quero ouvir você cantar Sway it, hula girl, sway it all aroundSway it side to side, then you dip way downHold your head up high as you reach for the sky Hold your head up high as you reach for the skyThen you sway side to side, hula girl"
+                songs.forEach(function(song) {
+                // 모든 노래 제목 부분의 텍스트 색상을 검정색으로 변경합니다.
+                song.style.color = "white";
+            });
+                break;
+            case 'Red_Blouse.mp3':
+                backgroundImage = 'photo2.png';
+                lyrics1.style.display = "none";
+                lyrics2.style.display = "none";
+                songs.forEach(function(song) {
+                // 모든 노래 제목 부분의 텍스트 색상을 검정색으로 변경합니다.
+                song.style.color = "white";
+            });
+                break;
+            case 'My_Cherie_Amour.mp3':
+                backgroundImage = 'photo3.png';
+                lyrics1.style.display = "block";
+                lyrics2.style.display = "block";
+                lyrics1.style.color = "black";
+                lyrics2.style.color = "black";
+                lyrics1.innerHTML = "My cherie amour, lovely as a summer day My cherie amour, distant as the milky way My cherie amour, pretty little one that i adore You're the only one my heart beats for How i wish that you were mine In a cafe or sometimes on a crowded street I've been near you, but you never noticed me My cherie amour, won't you tell me how could you ignore That behind that little smile i wore How i wish that you were mine";
+                lyrics2.innerHTML = "Maybe someday you'll see my face among the crowd Maybe someday i'll share your little distant cloud Oh cherie amour, pretty little one that i adore You're the only girl my heart beats for How i wish that you were mine My cherie amour, lovely as a summer day My cherie amour, distant as the milky way My cherie amour, pretty little one that i adore You're the only one my heart beats for How i wish that you were mine";
+                songs.forEach(function(song) {
+                // 모든 노래 제목 부분의 텍스트 색상을 검정색으로 변경합니다.
+                song.style.color = "black";
+            });
+                break;
+            case 'Pretty_World.mp3':
+                backgroundImage = 'photo4.png';
+                lyrics1.style.color = "white";
+                lyrics2.style.color = "white";
+                lyrics1.style.display = "block";
+                lyrics2.style.display = "block";
+                lyrics1.innerHTML = "Why don't we take a little piece of summer sky Hang it on a tree? For that's the way to start to make a pretty world For you and for me And for the sun we'll find a lemon bright balloon You can hold the string Oh can't you see this little world of ours will be The prettiest things?";
+                lyrics2.innerHTML = "We can gather rain enough from a stream To hold our happy faces If you want a breeze I'll blow you a kiss or two Take me in your arms And our little world will be the place of places Nothing else to makeBut breakfast and love We'll hang a little sign that just says Paradice population two I know together we can make a pretty world For me and for you For you That's what I'm longing to do To do To make a world with you"
+                songs.forEach(function(song) {
+                // 모든 노래 제목 부분의 텍스트 색상을 검정색으로 변경합니다.
+                song.style.color = "white";
+            });
+                break;
+            default:
+                // 기본 이미지 설정
+                backgroundImage = 'photo1.jpg';
+        }
+
+        changeBackground(backgroundImage);
+
+            // 노래를 재생합니다.
+            audioPlayer.src = songSrc;
+            audioPlayer.play();
+        });
+    });
+</script>
+</body>
+</html>
